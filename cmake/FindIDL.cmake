@@ -17,6 +17,8 @@ if (NOT MIDL_LATEST_FILE)
     return()
 endif()
 
+message(STATUS "MIDL: " ${MIDL_LATEST_FILE})
+
 function(get_target_platform_flag flag)
 if(${CMAKE_SIZEOF_VOID_P} EQUAL 4)
     set(${flag} win32 PARENT_SCOPE)

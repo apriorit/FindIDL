@@ -41,10 +41,11 @@ Example:
 add_idl(GreeterIDL Greeter.idl)
 ```
 
-The function makes the same work as MIDL, specifically:
-- generates Greeter_i.h
-- generates Greeter_i.c
-- generates Greeter_p.c
+The function makes the same work as MIDL, specifically generates files:
+- Greeter_i.h
+- Greeter_i.c
+- Greeter_p.c
+- Greeter.tlb
 
 To use the generated files the idl project should be linked as following
 ```cmake
