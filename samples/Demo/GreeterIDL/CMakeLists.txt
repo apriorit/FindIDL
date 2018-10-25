@@ -1,0 +1,1 @@
+add_idl(GreeterIDL Greeter.idl)

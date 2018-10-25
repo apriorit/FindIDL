@@ -1,41 +1,67 @@
-# FindIDL
-cmake module for working with idl
+# FindIDL [![Build status](https://ci.appveyor.com/api/projects/status/ixogwlydnlf0vl2b?svg=true)](https://ci.appveyor.com/project/apriorit/findidl)
+Cmake module for working with idl through MIDL
 
-## FindIDL
+* [Introduction](#introduction)
+  * [Requirements](#requirements)
+* [Usage](#usage)
+  * [find_package()](#find_package)
+  * [add_idl()](#add_idl)
+  * [MIDL flags](#midl-flags)
+* [Samples](#samples) 
+* [License](#license) 
+* [Version History](#version-history)
 
+# Introduction
+FindIDL makes it possible to use MIDL abilities inside CMake.
 
- This is cmake module which find midl.exe for using in your project
-This module adds two functions for ease of use idl.
+## Requirements
+- [CMake 3.0](https://cmake.org/download/) or higher
+- MIDL Compiler
 
-> function(add_idl idlproject idlfile)
+# Usage
+## find_package()
+Add [FindIDL](https://github.com/apriorit/FindIDL) to the module search path and call `find_package`:
+```cmake
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../cmake")
+find_package(IDL REQUIRED)
+```
+[FindIDL](https://github.com/apriorit/FindIDL) will search for midl.exe
 
-**where** 
-*idlproject* - The name of your new new project which will be generated from your idl file
-*idlfile* - full path to your idl file
+## add_idl()
+Takes two arguments: the name of the target project and idl file, possible with full path specified.
+```cmake
+add_idl(<name> source)
+```
+Where:
+- `<name>` - name of the target project
+- `source` - full path to idl file
 
-This function create INTERFACE library with name idlproject from idl file.
-Look to the  sample below.
-	
-	find_package(IDL REQUIRED)
-    add_executable(${PROJECT_NAME} "main.cpp")
-    add_idl(MyCustomIdlProject  ${CMAKE_CURRENT_SOURCE_DIR}/idl/Custom.idl)
-    target_link_libraries(${PROJECT_NAME} ${idl_file_name}_gen_idl)
+Example:
+```cmake
+add_idl(GreeterIDL Greeter.idl)
+```
 
-The second function more friendly .
-Sample below shows same logic to sample above.
+The function makes the same work as MIDL, specifically:
+- generates Greeter_i.h
+- generates Greeter_i.c
+- generates Greeter_p.c
 
-> function(target_link_idl target idlfile)
+To use the generated files the idl project should be linked as following
+```cmake
+target_link_libraries(Main GreeterIDL)
+```
 
-**where** 
-*target* - your own target  
-*idlfile* - full path to you idl file
+## MIDL flags
+It is possible to specify MIDL flags, such as midl command line keys.
+```cmake
+set(MIDL_FLAGS /target NT60)
+```
+Current can be useful to avoid MIDL2455 error. 
 
-    find_package(IDL REQUIRED)
-    add_executable(${PROJECT_NAME} "main.cpp")
-    target_link_idl(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/idl/Custom.idl)
+# Samples 
+Take a look at the [samples](samples/) folder to see how to use [FindIDL](https://github.com/apriorit/FindIDL).
 
+# License
+[Apriorit](http://www.apriorit.com/) released [FindIDL](https://github.com/apriorit/FindIDL) under the OSI-approved 3-clause BSD license. You can freely use it in your commercial or opensource software.
 
-
-
-
-
+# Version History

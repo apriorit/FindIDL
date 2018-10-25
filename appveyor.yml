@@ -1,0 +1,18 @@
+image: Visual Studio 2015
+
+environment:
+  matrix:
+    - generator: "Visual Studio 14 2015"
+    - generator: "Visual Studio 14 2015 Win64"
+    
+matrix:
+  fast_finish: true
+    
+shallow_clone: true
+  
+before_build:
+  - cmake -Hsamples -Bbuild -G"%generator%"
+
+build_script:
+  - cmake --build build --config Debug -- /m /v:m
+  - cmake --build build --config RelWithDebInfo -- /m /v:m

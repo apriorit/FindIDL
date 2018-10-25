@@ -1,0 +1,3 @@
+add_subdirectory(GreeterLib)
+add_subdirectory(GreeterIDL)
+add_subdirectory(Main)
