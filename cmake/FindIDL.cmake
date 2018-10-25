@@ -6,8 +6,6 @@ if(MIDL_FILES)
     list(GET MIDL_FILES -1 MIDL_LATEST_FILE)
 endif()
 
-message(STATUS "MIDL_FILES :" ${MIDL_FILES})
-
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(IDL DEFAULT_MSG MIDL_LATEST_FILE)
 mark_as_advanced(IDL)
