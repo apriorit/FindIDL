@@ -6,8 +6,8 @@
 class GreeterLib : public ATL::CAtlDllModuleT< GreeterLib >
 {
 public :
-	DECLARE_LIBID(LIBID_GreeterLib)
-	DECLARE_REGISTRY_APPID_RESOURCEID(IDR_GREETERLIB, "{8c546c0f-70c5-429e-be3b-6c14c92a7845}")
+    DECLARE_LIBID(LIBID_GreeterLib)
+    DECLARE_REGISTRY_APPID_RESOURCEID(IDR_GREETERLIB, "{8c546c0f-70c5-429e-be3b-6c14c92a7845}")
 };
 
 GreeterLib _AtlModule;

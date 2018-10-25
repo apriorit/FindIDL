@@ -1,4 +1,4 @@
-# FindIDL [![Build status](https://ci.appveyor.com/api/projects/status/ixogwlydnlf0vl2b?svg=true)](https://ci.appveyor.com/project/apriorit/findidl)
+# FindIDL [![Build status](https://ci.appveyor.com/api/projects/status/github/apriorit/FindIDL?svg=true)](https://ci.appveyor.com/project/apriorit/findidl)
 Cmake module for working with idl through MIDL
 
 * [Introduction](#introduction)
