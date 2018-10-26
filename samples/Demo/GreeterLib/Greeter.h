@@ -1,6 +1,6 @@
 #pragma once
 #include "resource.h" 
-#include "Greeter_i.h"
+#include "Greeter_i.h" // generated from idl
 
 class ATL_NO_VTABLE CGreeter :
     public CComObjectRootEx<CComSingleThreadModel>,

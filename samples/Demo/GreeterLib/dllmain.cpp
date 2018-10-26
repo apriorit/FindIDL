@@ -1,11 +1,11 @@
 #include "stdafx.h"
 #include "resource.h"
-#include "Greeter_i.h"
-#include "Greeter_i.c"
+#include "Greeter_i.h" // generated from idl
+#include "Greeter_i.c" // generated from idl
 
-class GreeterLib : public ATL::CAtlDllModuleT< GreeterLib >
+class GreeterLib : public CAtlDllModuleT<GreeterLib>
 {
-public :
+public:
     DECLARE_LIBID(LIBID_GreeterLib)
     DECLARE_REGISTRY_APPID_RESOURCEID(IDR_GREETERLIB, "{8c546c0f-70c5-429e-be3b-6c14c92a7845}")
 };
@@ -18,7 +18,6 @@ extern "C" BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpRes
     hInstance;
     return _AtlModule.DllMain(dwReason, lpReserved);
 }
-
 
 // Used to determine whether the DLL can be unloaded by OLE.
 _Use_decl_annotations_
