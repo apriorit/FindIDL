@@ -1,5 +1,5 @@
 # FindIDL [![Build status](https://ci.appveyor.com/api/projects/status/github/apriorit/FindIDL?svg=true)](https://ci.appveyor.com/project/apriorit/findidl)
-Cmake module for working with idl through MIDL
+CMake module for building IDL files with MIDL
 
 * [Introduction](#introduction)
   * [Requirements](#requirements)
@@ -12,11 +12,11 @@ Cmake module for working with idl through MIDL
 * [Version History](#version-history)
 
 # Introduction
-FindIDL makes it possible to use MIDL abilities inside CMake.
+IDL is used for creating COM servers. Unfortunately CMake has no built-in support for IDL, so this module comes to rescue.
 
 ## Requirements
 - [CMake 3.0](https://cmake.org/download/) or higher
-- MIDL Compiler
+- MIDL compiler
 
 # Usage
 ## find_package()
@@ -66,3 +66,6 @@ Take a look at the [samples](samples/) folder to see how to use [FindIDL](https:
 [Apriorit](http://www.apriorit.com/) released [FindIDL](https://github.com/apriorit/FindIDL) under the OSI-approved 3-clause BSD license. You can freely use it in your commercial or opensource software.
 
 # Version History
+
+## Version 1.0.0 (26 Oct 2018)
+- Initial public release
