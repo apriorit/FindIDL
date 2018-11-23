@@ -12,7 +12,7 @@ CMake module for building IDL files with MIDL
 * [Version History](#version-history)
 
 # Introduction
-IDL is used for creating COM servers. Unfortunately CMake has no built-in support for IDL, so this module comes to rescue.
+IDL is used for creating COM servers. Unfortunately CMake has a limited support for IDL, so this module comes to rescue.
 
 ## Requirements
 - [CMake 3.0](https://cmake.org/download/) or higher
