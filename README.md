@@ -15,7 +15,7 @@ CMake module for building IDL files with MIDL and for embedding information from
 IDL is used for creating COM servers. Unfortunately CMake has a limited support for IDL, so this module comes to rescue. The Type Library Importer converts the type definitions found within a COM type library into equivalent definitions in a common language runtime assembly. The output of Tlbimp.exe is a binary file (an assembly) that contains runtime metadata for the types defined within the original type library.
 
 ## Requirements
-- [CMake 3.0](https://cmake.org/download/) or higher
+- [CMake 3.15.0](https://cmake.org/download/) or higher
 - MIDL compiler
 - Tlbimp.exe
 
@@ -26,14 +26,9 @@ Add [FindIDL](https://github.com/apriorit/FindIDL) to the module search path and
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../cmake")
 find_package(IDL REQUIRED)
 ```
-[FindIDL](https://github.com/apriorit/FindIDL) will search for midl.exe
-Also if you are going to use tlbimp, you should call `find_package` for tlbimp:
-```cmake
-find_package(TLBIMP REQUIRED)
-```
-[FindIDL](https://github.com/apriorit/FindIDL) will search for Tlbimp.exe
+[FindIDL](https://github.com/apriorit/FindIDL) will search for midl.exe and tlbimp.exe
 
-## add_idl() (simple mode)
+## add_idl() simple mode
 Takes two arguments: the name of the target project and idl file, possible with full path specified.
 ```cmake
 add_idl(<name> source)
@@ -58,7 +53,7 @@ To use the generated files the idl project should be linked as following
 target_link_libraries(Main GreeterIDL)
 ```
 
-## add_idl() (with tlbimp mode)
+## add_idl() with tlbimp mode
 Takes four arguments: the name of the target project, idl file, possible with full path specified, TLBIMP flag and the name of the tlbimp target. 
 ```cmake
 add_idl(<name> source TLBIMP <tlbimp name>)

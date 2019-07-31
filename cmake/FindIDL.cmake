@@ -20,7 +20,7 @@ function(add_idl _target _idlfile)
        DEPENDS ${CMAKE_CURRENT_LIST_DIR}/${_idlfile}
        VERBATIM
        )
-
+ 
     add_custom_target(${_target}_gen DEPENDS ${MIDL_OUTPUT} SOURCES ${_idlfile})
     add_library(${_target} INTERFACE  )
     add_dependencies(${_target} ${_target}_gen)
@@ -41,7 +41,7 @@ function(add_idl _target _idlfile)
         endif()
         
         if (NOT TLBIMP_FILE)
-            message(FATAL_ERROR "TLBIMP_FILE didn't found")
+            message(FATAL_ERROR "Cannot found Tlbimp.exe. Try to download .NET Framework SDK and .NET Framework targeting pack.")
             return()
         endif()
         
