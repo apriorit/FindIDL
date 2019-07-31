@@ -25,4 +25,54 @@ function(add_idl _target _idlfile)
     add_library(${_target} INTERFACE  )
     add_dependencies(${_target} ${_target}_gen)
     target_include_directories(${_target} INTERFACE ${MIDL_OUTPUT_PATH})
+
+    cmake_parse_arguments(FINDIDL "" "TLBIMP" "" ${ARGN})
+     
+    message("|||||||||||||||||||||${FINDIDL_TLBIMP}||||||||||||||||||||||||||||||||||||||||||||||||||")
+ 
+    if (FINDIDL_TLBIMP)
+        message(|||||||||||||||||||||||LOLITWORKS|||||||||||||||||||||||)
+        message(|||||||||||||||||||||||${FINDIDL_TLBIMP} ${MIDL_OUTPUT_PATH}/${_idlfile}|||||||||||||||||||||||)
+        message(|||||||||||||||||||||||${FINDIDL_TLBIMP} ${_target}|||||||||||||||||||||||)
+       
+	file(GLOB TLBIMPv7_FILES "C:/Program Files*/Microsoft SDKs/Windows/v7*/bin/TlbImp.exe") 
+        file(GLOB TLBIMPv8_FILES "C:/Program Files*/Microsoft SDKs/Windows/v8*/bin/*/TlbImp.exe")
+        file(GLOB TLBIMPv10_FILES "C:/Program Files*/Microsoft SDKs/Windows/v10*/bin/*/TlbImp.exe")
+
+        list(APPEND TLBIMP_FILES ${TLBIMPv7_FILES} ${TLBIMPv8_FILES} ${TLBIMPv10_FILES})
+     
+        if(TLBIMP_FILES)
+            list(GET TLBIMP_FILES -1 TLBIMP_FILE)
+        endif()
+
+        if (NOT TLBIMP_FILE)
+            return()
+        endif()
+
+        message(STATUS "Found TlbImp: " ${TLBIMP_FILE})
+
+        set(PATH ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+        if ("${PATH}" STREQUAL "")
+            set(PATH ${CMAKE_BINARY_DIR})
+        endif()
+
+        add_custom_command(
+        OUTPUT  ${PATH}/${FINDIDL_TLBIMP}.dll
+        COMMAND ${TLBIMP_FILE} "${MIDL_OUTPUT_PATH}/${IDL_FILE_NAME_WE}.tlb" "/out:${PATH}/${FINDIDL_TLBIMP}.dll"
+        DEPENDS ${MIDL_OUTPUT_PATH}/${IDL_FILE_NAME_WE}.tlb
+        VERBATIM
+        )
+	
+        add_custom_target(${FINDIDL_TLBIMP} DEPENDS ${FINDIDL_TLBIMP}.dll)
+
+       # add_library(${FINDIDL_TLBIMP} SHARED IMPORTED GLOBAL)
+       # add_dependencies(${FINDIDL_TLBIMP} ${FINDIDL_TLBIMP}_target)
+
+       # set_target_properties(${FINDIDL_TLBIMP}
+       # PROPERTIES
+       # IMPORTED_LOCATION "W:/Repositories/FindIDL/build"	
+       # )
+
+        endif()
+
 endfunction()

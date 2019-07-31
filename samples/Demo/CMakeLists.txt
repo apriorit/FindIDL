@@ -1,4 +1,5 @@
 add_subdirectory(GreeterLib)
+add_subdirectory(GreeterIDLWithTLBIMP)
+add_subdirectory(MainWithTLBIMP)
 add_subdirectory(GreeterIDL)
 add_subdirectory(Main)
-add_subdirectory(MainTLBIMP)

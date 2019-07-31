@@ -1,5 +1,5 @@
 using System;
-using GreeterDLL;
+using GreeterDLLWithTLBIMP;
 
 namespace Samples
 {
