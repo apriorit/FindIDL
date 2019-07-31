@@ -33,5 +33,14 @@ function(add_tlbimp _target _tlbfile)
        VERBATIM
        )
 
-    add_custom_target(${_target} DEPENDS ${_target}.dll)
+    add_custom_target(${_target}_target DEPENDS ${_target}.dll)
+
+    add_library(${_target} SHARED IMPORTED GLOBAL)
+    add_dependencies(${_target} ${_target}_target)
+
+    set_target_properties(${_target}
+        PROPERTIES
+        IMPORTED_LOCATION "${PATH}/${_target}.dll"
+        IMPORTED_COMMON_LANGUAGE_RUNTIME "CSharp"
+        )
 endfunction()

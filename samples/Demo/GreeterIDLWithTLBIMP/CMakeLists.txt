@@ -1,1 +1,4 @@
 add_idl(GreeterIDLWithTLBIMP Greeter.idl TLBIMP GreeterDLLWithTLBIMP)
+
+add_tlbimp(GreeterDLLWithTLBIMPLib ${CMAKE_CURRENT_BINARY_DIR}/Generated/Greeter.tlb)
+add_dependencies(GreeterDLLWithTLBIMPLib GreeterIDLWithTLBIMP)

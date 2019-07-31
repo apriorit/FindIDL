@@ -67,7 +67,7 @@ function(add_idl _target _idlfile)
        
         set_target_properties(${FINDIDL_TLBIMP}
         PROPERTIES
-        IMPORTED_LOCATION "W:/Repositories/FindIDL/build/GreeterDLLWithTLBIMP.dll"	
+        IMPORTED_LOCATION "${PATH}/${FINDIDL_TLBIMP}.dll"
         )
 
         endif()
