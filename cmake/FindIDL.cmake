@@ -60,15 +60,15 @@ function(add_idl _target _idlfile)
         VERBATIM
         )
         
-        add_custom_target(${FINDIDL_TLBIMP} DEPENDS ${FINDIDL_TLBIMP}.dll)
+        add_custom_target(${FINDIDL_TLBIMP}_target DEPENDS ${FINDIDL_TLBIMP}.dll)
         
-       # add_library(${FINDIDL_TLBIMP} SHARED IMPORTED GLOBAL)
-       # add_dependencies(${FINDIDL_TLBIMP} ${FINDIDL_TLBIMP}_target)
+        add_library(${FINDIDL_TLBIMP} SHARED IMPORTED GLOBAL)
+        add_dependencies(${FINDIDL_TLBIMP} ${FINDIDL_TLBIMP}_target)
        
-       # set_target_properties(${FINDIDL_TLBIMP}
-       # PROPERTIES
-       # IMPORTED_LOCATION "W:/Repositories/FindIDL/build"	
-       # )
+        set_target_properties(${FINDIDL_TLBIMP}
+        PROPERTIES
+        IMPORTED_LOCATION "W:/Repositories/FindIDL/build/GreeterDLLWithTLBIMP.dll"	
+        )
 
         endif()
 

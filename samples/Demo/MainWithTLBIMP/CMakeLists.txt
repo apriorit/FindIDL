@@ -7,5 +7,5 @@ set_property(TARGET MainWithTLBIMP PROPERTY VS_DOTNET_REFERENCES
     #GreeterDLL
     #GreeterDLLWithTLBIMP
     "${CMAKE_BINARY_DIR}/GreeterDLLWithTLBIMP.dll"
-    "System"
+    #"System"
     ) 
