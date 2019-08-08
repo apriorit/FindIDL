@@ -20,53 +20,59 @@ function(add_idl _target _idlfile)
        DEPENDS ${CMAKE_CURRENT_LIST_DIR}/${_idlfile}
        VERBATIM
        )
- 
-    add_custom_target(${_target}_gen DEPENDS ${MIDL_OUTPUT} SOURCES ${_idlfile})
-    add_library(${_target} INTERFACE  )
-    add_dependencies(${_target} ${_target}_gen)
-    target_include_directories(${_target} INTERFACE ${MIDL_OUTPUT_PATH})
+
+    set(FINDIDL_TARGET ${_target}_gen)
 
     cmake_parse_arguments(FINDIDL "" "TLBIMP" "" ${ARGN})
  
-    if(FINDIDL_TLBIMP)       
+    if(FINDIDL_TLBIMP)
         file(GLOB TLBIMPv7_FILES "C:/Program Files*/Microsoft SDKs/Windows/v7*/bin/TlbImp.exe") 
         file(GLOB TLBIMPv8_FILES "C:/Program Files*/Microsoft SDKs/Windows/v8*/bin/*/TlbImp.exe")
         file(GLOB TLBIMPv10_FILES "C:/Program Files*/Microsoft SDKs/Windows/v10*/bin/*/TlbImp.exe")
 
         list(APPEND TLBIMP_FILES ${TLBIMPv7_FILES} ${TLBIMPv8_FILES} ${TLBIMPv10_FILES})
-       
+
         if(TLBIMP_FILES)
             list(GET TLBIMP_FILES -1 TLBIMP_FILE)
         endif()
-        
+
         if (NOT TLBIMP_FILE)
             message(FATAL_ERROR "Cannot found tlbimp.exe. Try to download .NET Framework SDK and .NET Framework targeting pack.")
             return()
         endif()
-        
+
         message(STATUS "Found tlbimp.exe: " ${TLBIMP_FILE})
-        
-        set(PATH ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-        
-        if ("${PATH}" STREQUAL "")
-            set(PATH ${CMAKE_BINARY_DIR})
+
+        set(TLBIMP_OUTPUT_PATH ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+        if("${TLBIMP_OUTPUT_PATH}" STREQUAL "")
+            set(TLBIMP_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
         endif()
         
+        set(TLBIMP_OUTPUT ${TLBIMP_OUTPUT_PATH}/${FINDIDL_TLBIMP}.dll)
+
         add_custom_command(
-            OUTPUT  ${PATH}/${FINDIDL_TLBIMP}.dll
-            COMMAND ${TLBIMP_FILE} "${MIDL_OUTPUT_PATH}/${IDL_FILE_NAME_WE}.tlb" "/out:${PATH}/${FINDIDL_TLBIMP}.dll"
+            OUTPUT  ${TLBIMP_OUTPUT}
+            COMMAND ${TLBIMP_FILE} "${MIDL_OUTPUT_PATH}/${IDL_FILE_NAME_WE}.tlb" "/out:${TLBIMP_OUTPUT}"
             DEPENDS ${MIDL_OUTPUT_PATH}/${IDL_FILE_NAME_WE}.tlb
             VERBATIM
             )
-        
-        add_custom_target(${FINDIDL_TLBIMP}_target DEPENDS ${FINDIDL_TLBIMP}.dll)
-        
+
+        add_custom_target(${FINDIDL_TARGET} DEPENDS ${MIDL_OUTPUT} ${TLBIMP_OUTPUT} SOURCES ${_idlfile})
+
         add_library(${FINDIDL_TLBIMP} SHARED IMPORTED GLOBAL)
-        add_dependencies(${FINDIDL_TLBIMP} ${FINDIDL_TLBIMP}_target)
-       
+        add_dependencies(${FINDIDL_TLBIMP} ${FINDIDL_TARGET})
+
         set_target_properties(${FINDIDL_TLBIMP}
             PROPERTIES
-            IMPORTED_LOCATION "${PATH}/${FINDIDL_TLBIMP}.dll"
+            IMPORTED_LOCATION "${TLBIMP_OUTPUT}"
+            IMPORTED_COMMON_LANGUAGE_RUNTIME "CSharp"
             )
-        endif()
+    else()
+        add_custom_target(${FINDIDL_TARGET} DEPENDS ${MIDL_OUTPUT} SOURCES ${_idlfile})
+    endif()
+    
+    add_library(${_target} INTERFACE)
+    add_dependencies(${_target} ${FINDIDL_TARGET})
+    target_include_directories(${_target} INTERFACE ${MIDL_OUTPUT_PATH})
 endfunction()

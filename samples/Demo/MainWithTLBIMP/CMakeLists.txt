@@ -1,4 +1,0 @@
-add_executable(MainWithTLBIMP "main.cs")
-
-add_dependencies(MainWithTLBIMP GreeterDLLWithTLBIMPLib)
-target_link_libraries(MainWithTLBIMP GreeterDLLWithTLBIMPLib)
