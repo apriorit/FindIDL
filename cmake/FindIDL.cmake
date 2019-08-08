@@ -28,8 +28,7 @@ function(add_idl _target _idlfile)
 
     cmake_parse_arguments(FINDIDL "" "TLBIMP" "" ${ARGN})
  
-    if (FINDIDL_TLBIMP)
-       
+    if(FINDIDL_TLBIMP)       
         file(GLOB TLBIMPv7_FILES "C:/Program Files*/Microsoft SDKs/Windows/v7*/bin/TlbImp.exe") 
         file(GLOB TLBIMPv8_FILES "C:/Program Files*/Microsoft SDKs/Windows/v8*/bin/*/TlbImp.exe")
         file(GLOB TLBIMPv10_FILES "C:/Program Files*/Microsoft SDKs/Windows/v10*/bin/*/TlbImp.exe")
@@ -41,11 +40,11 @@ function(add_idl _target _idlfile)
         endif()
         
         if (NOT TLBIMP_FILE)
-            message(FATAL_ERROR "Cannot found Tlbimp.exe. Try to download .NET Framework SDK and .NET Framework targeting pack.")
+            message(FATAL_ERROR "Cannot found tlbimp.exe. Try to download .NET Framework SDK and .NET Framework targeting pack.")
             return()
         endif()
         
-        message(STATUS "Found TlbImp: " ${TLBIMP_FILE})
+        message(STATUS "Found tlbimp.exe: " ${TLBIMP_FILE})
         
         set(PATH ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
         
@@ -54,11 +53,11 @@ function(add_idl _target _idlfile)
         endif()
         
         add_custom_command(
-        OUTPUT  ${PATH}/${FINDIDL_TLBIMP}.dll
-        COMMAND ${TLBIMP_FILE} "${MIDL_OUTPUT_PATH}/${IDL_FILE_NAME_WE}.tlb" "/out:${PATH}/${FINDIDL_TLBIMP}.dll"
-        DEPENDS ${MIDL_OUTPUT_PATH}/${IDL_FILE_NAME_WE}.tlb
-        VERBATIM
-        )
+            OUTPUT  ${PATH}/${FINDIDL_TLBIMP}.dll
+            COMMAND ${TLBIMP_FILE} "${MIDL_OUTPUT_PATH}/${IDL_FILE_NAME_WE}.tlb" "/out:${PATH}/${FINDIDL_TLBIMP}.dll"
+            DEPENDS ${MIDL_OUTPUT_PATH}/${IDL_FILE_NAME_WE}.tlb
+            VERBATIM
+            )
         
         add_custom_target(${FINDIDL_TLBIMP}_target DEPENDS ${FINDIDL_TLBIMP}.dll)
         
@@ -66,10 +65,8 @@ function(add_idl _target _idlfile)
         add_dependencies(${FINDIDL_TLBIMP} ${FINDIDL_TLBIMP}_target)
        
         set_target_properties(${FINDIDL_TLBIMP}
-        PROPERTIES
-        IMPORTED_LOCATION "${PATH}/${FINDIDL_TLBIMP}.dll"
-        )
-
+            PROPERTIES
+            IMPORTED_LOCATION "${PATH}/${FINDIDL_TLBIMP}.dll"
+            )
         endif()
-
 endfunction()
