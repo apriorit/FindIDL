@@ -1,0 +1,1 @@
+add_idl(GreeterIDLWithTLBIMP Greeter.idl TLBIMP GreeterInterop)

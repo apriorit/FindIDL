@@ -1,3 +1,5 @@
-add_subdirectory(GreeterLib)
 add_subdirectory(GreeterIDL)
-add_subdirectory(Main)
+add_subdirectory(GreeterIDLWithTLBIMP)
+add_subdirectory(GreeterLib)
+add_subdirectory(MainCpp)
+add_subdirectory(MainCsharp)
