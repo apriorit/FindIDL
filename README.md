@@ -8,6 +8,7 @@ CMake module for building IDL files with MIDL and generating CLR DLL using Tlbim
   * [add_idl()](#add_idl)
   * [add_idl() with tlbimp](#add_idl-with-tlbimp)
   * [MIDL flags](#midl-flags)
+  * [TLBIMP flags](#tlbimp-flags)
 * [Samples](#samples) 
 * [License](#license) 
 * [Version History](#version-history)
@@ -87,11 +88,16 @@ target_link_libraries(MainCsharp GreeterInterop)
 ```
 
 ## MIDL flags
-It is possible to specify MIDL flags, such as midl command line keys.
+To specify additional command-line options for midl set `MIDL_FLAGS` variabe.
 ```cmake
-set(MIDL_FLAGS /target NT60)
+set(MIDL_FLAGS /target NT60) # avoid MIDL2455 error
 ```
-This can be useful to avoid MIDL2455 error.
+
+## TLBIMP flags
+To specify additional command-line options for tlbimp set `TLBIMP_FLAGS` variabe.
+```cmake
+set(TLBIMP_FLAGS /silence:3002) # importing a type library into a platform agnostic assembly
+```
 
 # Samples 
 Take a look at the [samples](samples/) folder to see how to use [FindIDL](https://github.com/apriorit/FindIDL).
@@ -100,6 +106,9 @@ Take a look at the [samples](samples/) folder to see how to use [FindIDL](https:
 [Apriorit](http://www.apriorit.com/) released [FindIDL](https://github.com/apriorit/FindIDL) under the OSI-approved 3-clause BSD license. You can freely use it in your commercial or opensource software.
 
 # Version History
+
+## Version 1.0.2 (15 Aug 2019)
+- New: Add `TLBIMP_FLAGS`
 
 ## Version 1.0.1 (08 Aug 2019)
 - New: Add tlbimp
