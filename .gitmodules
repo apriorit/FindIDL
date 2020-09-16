@@ -1,0 +1,4 @@
+[submodule "cmakeProcessCrashWorkaround"]
+	path = cmake/thirdparty/cmakeProcessCrashWorkaround
+	url = https://github.com/KOLANICH/cmakeProcessCrashWorkaround
+	branch = master
