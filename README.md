@@ -22,14 +22,18 @@ IDL is used for creating COM servers. Unfortunately CMake has a limited support 
 - Tlbimp.exe (optional)
 
 # Usage
-## find_package()
-Add [FindIDL](https://github.com/apriorit/FindIDL) to the module search path and call `find_package`:
+## Simplest integration
 ```cmake
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../cmake")
-find_package(IDL REQUIRED)
-```
-[FindIDL](https://github.com/apriorit/FindIDL) will search for midl.exe and tlbimp.exe
+if(NOT EXISTS "${CMAKE_CURRENT_BINARY_DIR}/FindIDL.cmake")
+  message(STATUS "Downloading FindIDL.cmake from https://github.com/apriorit/FindIDL")
+  file(DOWNLOAD "https://raw.githubusercontent.com/apriorit/FindIDL/1.0.2/cmake/FindIDL.cmake"
+                "${CMAKE_CURRENT_BINARY_DIR}/FindIDL.cmake"
+                EXPECTED_HASH SHA256=d88db93c485227b287371bd1848d82110fa5ef32e5febe6865aa3ec27c7558b3
+                TLS_VERIFY ON)
+endif()
 
+include(${CMAKE_CURRENT_BINARY_DIR}/FindIDL.cmake)
+```
 ## add_idl()
 Takes two arguments: the name of the target project and idl file.
 ```cmake
