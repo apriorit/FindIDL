@@ -18,6 +18,7 @@ function(add_idl _target _idlfile)
        OUTPUT ${MIDL_OUTPUT}
        COMMAND midl.exe ARGS /${MIDL_ARCH} /env ${MIDL_ARCH} /nologo ${CMAKE_CURRENT_LIST_DIR}/${_idlfile} /out ${MIDL_OUTPUT_PATH} ${MIDL_FLAGS} /h ${MIDL_OUTPUT}
        DEPENDS ${CMAKE_CURRENT_LIST_DIR}/${_idlfile}
+       WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
        VERBATIM
        )
 
@@ -55,6 +56,7 @@ function(add_idl _target _idlfile)
             OUTPUT  ${TLBIMP_OUTPUT}
             COMMAND ${TLBIMP_FILE} "${MIDL_OUTPUT_PATH}/${IDL_FILE_NAME_WE}.tlb" "/out:${TLBIMP_OUTPUT}" ${TLBIMP_FLAGS}
             DEPENDS ${MIDL_OUTPUT_PATH}/${IDL_FILE_NAME_WE}.tlb
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
             VERBATIM
             )
 
