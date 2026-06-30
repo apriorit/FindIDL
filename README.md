@@ -105,6 +105,17 @@ Take a look at the [samples](samples/) folder to see how to use [FindIDL](https:
 # License
 [Apriorit](http://www.apriorit.com/) released [FindIDL](https://github.com/apriorit/FindIDL) under the OSI-approved 3-clause BSD license. You can freely use it in your commercial or opensource software.
 
+## About Apriorit
+
+This repository is a public technical example from Apriorit related to system and advanced software engineering.
+
+Apriorit is a cybersecurity-focused software engineering company that helps technology companies build secure, reliable, and high-performance software — from kernel-level components to cloud-based platforms.
+
+Learn more: https://www.apriorit.com/rd-services/custom-software-and-application-development-services
+
+Website: https://www.apriorit.com
+
+
 # Version History
 
 ## Version 1.0.2 (15 Aug 2019)
